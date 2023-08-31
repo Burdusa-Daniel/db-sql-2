@@ -1,0 +1,52 @@
+1)select students.name as nome , students.surname as cognome ,students.enrolment_date as data_iscrizione, degrees.name as corso_di_laurea from students 
+join degrees on students.degree_id = degrees.id 
+where degrees.name = "corso di laurea in economia"
+order by students.name;
+
+2)select degrees.name  
+from degrees 
+join departments on degrees.department_id = departments.id 
+where departments.name ="Dipartimento di Neuroscienze"
+
+3)select teachers.name as nome, teachers.surname as cognome, courses.id ,courses.name as nome_corso,courses.period as durata
+from teachers 
+join course_teacher on teachers.id = course_teacher.teacher_id 
+join courses on course_teacher.course_id = courses.id 
+where teachers.id =44
+
+4)select students.name as nome , students.surname as cognome , degrees.name as corso_laurea, departments.name as nome_dipartimento 
+from students 
+join degrees on students.degree_id  = degrees.id  
+join departments on degrees.department_id  = departments.id 
+order by students.surname ,students.name;
+
+5)select * 
+from degrees 
+join courses on degrees.id = courses.degree_id 
+join course_teacher on courses.id = course_teacher.course_id 
+join teachers  on course_teacher.teacher_id = teachers.id 
+
+6)select distinct teachers.id,teachers.name ,teachers.surname  
+from teachers 
+join course_teacher on teachers.id = course_teacher.teacher_id 
+join courses on course_teacher.course_id = courses.id 
+join degrees on courses.degree_id = degrees.id 
+join departments on degrees.department_id = departments.id 
+where departments.name = "Dipartimento di Matematica" ;
+
+7)select count(*) as iscrizioni ,year(enrolment_date) as anno_iscrizione
+from students 
+group by year(enrolment_date)
+order by year(enrolment_date);
+
+8)select count(*), office_address as ufficio
+from teachers 
+group by office_address ;
+
+9)select exam_id as id_esame,AVG(exam_student.vote) AS media_voto
+from exam_student 
+group by exam_id 
+
+10)select  department_id as dipartimento , count(*) as corsi_per_ogni_dipartimento 
+from degrees
+group by department_id
